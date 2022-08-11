@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Stage AWS
-          command: make ci-stage
+          command: ./ci-stage.sh
 
 workflows:
   # build:

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 switch_tf_workspace() {
   terraform workspace new $1
