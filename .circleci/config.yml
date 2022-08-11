@@ -15,7 +15,7 @@ jobs:
   #           - infrastructure/functions
   stage:
     docker:
-      - image: circleci/terraform
+      - image: hashicorp/terraform
     steps:
       - checkout
       - run:
