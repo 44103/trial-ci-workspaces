@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Stage AWS
-          command: ./ci-stage.sh sample
+          command: ./ci-stage.sh ${CIRCLE_BRANCH}
 
 workflows:
   # build:
