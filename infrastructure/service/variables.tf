@@ -9,7 +9,7 @@ variable "project" {
 
 variable "service" {
   description = "サービス名"
-  default     = "rust"
+  default     = "circleci"
 }
 
 variable "environment" {

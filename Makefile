@@ -1,4 +1,5 @@
-.PHONY: init plan apply destroy check create build
+.PHONY: init plan apply destroy check create build \
+	ci-build ci-stage
 
 init:
 	@docker compose run --rm terraform init
@@ -23,3 +24,9 @@ create:
 
 build:
 	@docker compose run --rm app /bin/bash -c "cd $(FUNC) && rustup target add x86_64-unknown-linux-musl && cargo build --release --target x86_64-unknown-linux-musl"
+
+ci-build:
+	@ci-build.sh
+
+ci-stage:
+	@ci-stage.sh

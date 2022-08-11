@@ -4,15 +4,15 @@ services:
   terraform:
     image: hashicorp/terraform:latest
     volumes:
-      - ./infrastructure:/workspace
+      - ./infrastructure:/work
     environment:
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
       - AWS_REGION
-    working_dir: "/workspace/service"
+    working_dir: "/work/service"
 
   app:
     image: rust
     volumes:
-      - ./infrastructure/functions:/workspace
-    working_dir: "/workspace"
+      - ./infrastructure/functions:/work
+    working_dir: "/work"
