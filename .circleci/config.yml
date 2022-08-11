@@ -23,7 +23,11 @@ jobs:
           command: make ci-stage
 
 workflows:
-  build_and_stage:
+  build:
     jobs:
       - build
+  stage:
+    jobs:
       - stage
+    requires:
+      - build
