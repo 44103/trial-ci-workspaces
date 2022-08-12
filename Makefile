@@ -2,7 +2,7 @@
 	ci-build ci-stage
 
 init:
-	@docker compose run --rm terraform init
+	@docker compose run --rm terraform init -reconfigure -backend-config=dev.tfbackend
 
 plan:
 	@docker compose run --rm terraform plan

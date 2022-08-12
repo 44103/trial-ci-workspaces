@@ -7,6 +7,8 @@ switch_tf_workspace() {
 
 cd infrastructure/service
 
+echo $DEV_TFBACKEND | base64 --decode >dev.tfbackend
+
 terraform init
 terraform fmt -check
 terraform validate

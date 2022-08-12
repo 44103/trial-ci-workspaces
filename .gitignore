@@ -2,3 +2,4 @@
 *.tfvars
 .env
 *.tfstate*
+*.tfbackend
