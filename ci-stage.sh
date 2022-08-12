@@ -9,7 +9,7 @@ cd infrastructure/service
 
 echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
 
-terraform init
+terraform init -reconfigure -backend-config=dev.tfbackend
 terraform fmt -check
 terraform validate
 switch_tf_workspace $1
