@@ -20,9 +20,7 @@ jobs:
       - checkout
       - run:
           name: Stage AWS
-          command: ./ci-stage.sh ${CIRCLE_BRANCH} ${COMMIT_MESSAGE}
-          environment:
-            COMMIT_MESSAGE: $(git log --format=oneline -n 1 $CIRCLE_SHA1)
+          command: ./ci-stage.sh ${CIRCLE_BRANCH}
 
 
 workflows:
