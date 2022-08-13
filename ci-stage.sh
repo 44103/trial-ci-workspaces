@@ -10,7 +10,7 @@ cd infrastructure/service
 echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
 
 WORKSPACE=$1
-COMMIT_MSG=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
+COMMIT_MSG=$(git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1)
 
 if [[ $1 =~ feature ]]; then
   WORKSPACE=${1/feature\//ft}
