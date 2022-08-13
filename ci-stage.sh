@@ -10,10 +10,13 @@ cd infrastructure/service
 echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
 
 WORKSPACE=$1
+COMMIT_MSG=$2
 
 if [[ $1 =~ feature ]]; then
   WORKSPACE=${1/feature\//ft}
 fi
+
+echo $COMMIT_MSG
 
 terraform init -reconfigure -backend-config=dev.tfbackend
 terraform fmt -check
