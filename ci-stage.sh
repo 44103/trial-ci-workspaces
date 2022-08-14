@@ -38,7 +38,7 @@ fi
 
 WORKSPACE=$CURR_BRANCH
 if [[ $CURR_BRANCH =~ feature ]]; then
-  WORKSPACE=${1/feature\//ft}
+  WORKSPACE=${CURR_BRANCH/feature\//ft}
 fi
 
 init_tf_workspace $WORKSPACE
