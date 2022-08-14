@@ -33,6 +33,7 @@ if [ $(echo $COMMIT_MSG | egrep '^Merge pull request #[0-9]+ from') ]; then
   WORKSPACE=${MERGED_BRANCH/feature\//ft}
   init_tf_workspace $WORKSPACE
   terraform destroy -auto-approve
+  terraform workspace select default
   terraform workspace delete $WORKSPACE
 fi
 
