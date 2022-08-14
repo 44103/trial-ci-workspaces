@@ -18,6 +18,7 @@ init_tf_workspace() {
 cd infrastructure/service
 
 echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
+CURR_BRANCH=$1
 
 IFS_BACKUP=$IFS
 IFS=$'\n'
@@ -34,7 +35,8 @@ if [ $(echo $COMMIT_MSG | egrep '^Merge pull request #[0-9]+ from') ]; then
   terraform destroy -auto-approve
 fi
 
-if [[ $1 =~ feature ]]; then
+WORKSPACE=$CURR_BRANCH
+if [[ $CURR_BRANCH =~ feature ]]; then
   WORKSPACE=${1/feature\//ft}
 fi
 
