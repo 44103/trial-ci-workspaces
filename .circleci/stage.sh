@@ -26,16 +26,16 @@ IFS=$'\n'
 COMMIT_MSG=$(git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1)
 # COMMIT_MSG='Merge pull request #3 from xxxxx/feature/001-1'
 
-if [ $(echo $COMMIT_MSG | egrep '^Merge pull request #[0-9]+ from') ]; then
-  echo 'match merge pull request'
-  MERGED_BRANCH=$(echo $COMMIT_MSG | sed -E 's/^Merge pull request #[0-9]+ from [^/]+\///g')
-  echo $MERGED_BRANCH
-  WORKSPACE=${MERGED_BRANCH/feature\//ft}
-  init_tf_workspace $WORKSPACE
-  terraform destroy -auto-approve
-  terraform workspace select default
-  terraform workspace delete $WORKSPACE
-fi
+# if [ $(echo $COMMIT_MSG | egrep '^Merge pull request #[0-9]+ from') ]; then
+#   echo 'match merge pull request'
+#   MERGED_BRANCH=$(echo $COMMIT_MSG | sed -E 's/^Merge pull request #[0-9]+ from [^/]+\///g')
+#   echo $MERGED_BRANCH
+#   WORKSPACE=${MERGED_BRANCH/feature\//ft}
+#   init_tf_workspace $WORKSPACE
+#   terraform destroy -auto-approve
+#   terraform workspace select default
+#   terraform workspace delete $WORKSPACE
+# fi
 
 WORKSPACE=$CURR_BRANCH
 if [[ $CURR_BRANCH =~ feature ]]; then

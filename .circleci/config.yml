@@ -20,7 +20,17 @@ jobs:
       - checkout
       - run:
           name: Stage AWS
-          command: ./ci-stage.sh ${CIRCLE_BRANCH}
+          command: ./.circleci/stage.sh ${CIRCLE_BRANCH}
+  destroy:
+    docker:
+      - image: hashicorp/terraform
+    steps:
+      - checkout
+      - approval-destroy:
+          type: approval
+      - run:
+          name: Destroy
+          command: ./.circleci/destory.sh ${CIRCLE_BRANCH}
 
 
 workflows:
