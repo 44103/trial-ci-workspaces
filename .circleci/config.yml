@@ -28,7 +28,7 @@ jobs:
       - checkout
       - run:
           name: Destroy
-          command: ./.circleci/destory.sh ${CIRCLE_BRANCH}
+          command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
 
 
 workflows:
@@ -40,6 +40,8 @@ workflows:
       - stage
       - approval-destroy:
           type: approval
-      - destroy
+      - destroy:
+          requires:
+            - approval-destroy
     # requires:
     #   - build
