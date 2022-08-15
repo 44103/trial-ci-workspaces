@@ -26,8 +26,6 @@ jobs:
       - image: hashicorp/terraform
     steps:
       - checkout
-      - approval-destroy:
-          type: approval
       - run:
           name: Destroy
           command: ./.circleci/destory.sh ${CIRCLE_BRANCH}
@@ -40,6 +38,8 @@ workflows:
   stage:
     jobs:
       - stage
+      - approval-destroy:
+          type: approval
       - destroy
     # requires:
     #   - build
