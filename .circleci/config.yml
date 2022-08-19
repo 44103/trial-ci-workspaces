@@ -4,7 +4,7 @@ commands:
   check-merged:
     parameters:
       pattern:
-        type: string
+        type: integer
     steps:
       - run:
           command: ./.circleci/check-merged.sh
@@ -36,7 +36,7 @@ jobs:
     steps:
       - checkout
       - check-merged:
-          pattern: "merge"
+          pattern: 0
       - run:
           name: Destroy
           command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
