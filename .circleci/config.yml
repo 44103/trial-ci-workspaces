@@ -34,10 +34,10 @@ jobs:
     docker:
       - image: hashicorp/terraform
     steps:
-      - checkout
       - run:
           name: Check
           command: ./.circleci/merged.sh
+      - checkout
       - run:
           name: Destroy
           command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
@@ -50,10 +50,10 @@ workflows:
   stage:
     jobs:
       - stage
-      - approval-destroy:
-          type: approval
-      - destroy:
-          requires:
-            - approval-destroy
+      # - approval-destroy:
+      #     type: approval
+      - destroy
+          # requires:
+          #   - approval-destroy
     # requires:
     #   - build
