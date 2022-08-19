@@ -34,9 +34,6 @@ jobs:
     docker:
       - image: hashicorp/terraform
     steps:
-      - run:
-          name: Destroy
-          command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
       - checkout
       - run:
           name: Destroy
