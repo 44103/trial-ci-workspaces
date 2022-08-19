@@ -11,6 +11,11 @@ apply:
 	@docker compose run --rm terraform apply -auto-approve
 
 destroy:
+	@docker compose run --rm terraform init -reconfigure -backend-config=dev.tfbackend
+	@docker compose run --rm terraform fmt -check
+	@docker compose run --rm terraform validate
+	@docker compose run --rm terraform workspace switch default
+	@docker compose run --rm terraform plan
 	@docker compose run --rm terraform destroy
 
 check:

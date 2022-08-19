@@ -4,7 +4,7 @@ commands:
   check-merged:
     parameters:
       pattern:
-        type: number
+        type: integer
       steps:
         - run: ./.circleci/check-merged.sh
 
