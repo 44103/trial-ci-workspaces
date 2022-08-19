@@ -1,5 +1,13 @@
 version: 2.1
 
+commands:
+  check-merged:
+    parameters:
+      pattern:
+        type: number
+      steps:
+        - run: ./.circleci/check-merged.sh
+
 jobs:
   # build:
   #   docker:
@@ -26,6 +34,8 @@ jobs:
       - image: hashicorp/terraform
     steps:
       - checkout
+      - check-merged:
+          pattern: 0
       - run:
           name: Destroy
           command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
