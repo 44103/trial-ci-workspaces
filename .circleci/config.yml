@@ -35,8 +35,8 @@ jobs:
       - image: hashicorp/terraform
     steps:
       - run:
-          name: Check
-          command: ./.circleci/destroy.sh
+          name: Destroy
+          command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
       - checkout
       - run:
           name: Destroy
