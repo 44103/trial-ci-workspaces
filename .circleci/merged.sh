@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CURR_BRANCH=$CIRCLE_BRANCH
+CURR_BRANCH=$1
 
 IFS_BACKUP=$IFS
 IFS=$'\n'
