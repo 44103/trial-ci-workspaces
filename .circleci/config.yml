@@ -36,7 +36,7 @@ jobs:
     steps:
       - run:
           name: Check
-          command: ./.circleci/merged.sh
+          command: ./.circleci/destroy.sh
       - checkout
       - run:
           name: Destroy
