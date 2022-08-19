@@ -4,7 +4,7 @@ commands:
   check-merged:
     parameters:
       pattern:
-        type: integer
+        type: string
     steps:
       - run:
           command: git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1
