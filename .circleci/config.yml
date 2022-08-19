@@ -6,7 +6,8 @@ commands:
       pattern:
         type: string
     steps:
-      - run: ./.circleci/check-merged.sh
+      - run:
+          command: ./.circleci/check-merged.sh
 
 jobs:
   # build:
