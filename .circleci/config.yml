@@ -5,8 +5,8 @@ commands:
     parameters:
       pattern:
         type: string
-      steps:
-        - run: git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1
+    steps:
+      - run: ./.circleci/check-merged.sh
 
 jobs:
   # build:
@@ -35,7 +35,7 @@ jobs:
     steps:
       - checkout
       - check-merged:
-          pattern: ^Merge pull request #[0-9]+ from
+          pattern: "merge"
       - run:
           name: Destroy
           command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
