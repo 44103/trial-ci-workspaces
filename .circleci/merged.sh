@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 CURR_BRANCH=$1
 
