@@ -10,6 +10,6 @@ COMMIT_MSG=$(git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1)
 
 if [ $(echo $COMMIT_MSG | egrep '^Merge pull request #[0-9]+ from') ]; then
   return 0
-else
-  return 1
 fi
+
+circleci step halt
