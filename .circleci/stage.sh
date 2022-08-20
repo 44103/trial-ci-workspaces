@@ -15,6 +15,8 @@ init_tf_workspace() {
   terraform plan
 }
 
+cd infrastructure/service
+
 echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
 
 WORKSPACE=$CIRCLE_BRANCH

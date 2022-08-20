@@ -20,7 +20,6 @@ jobs:
       - checkout
       - run:
           name: Stage
-          working_directory: infrastructure/service
           command: ./.circleci/stage.sh
   destroy:
     docker:
@@ -29,7 +28,6 @@ jobs:
       - checkout
       - run:
           name: Destroy
-          working_directory: infrastructure/service
           command: ./.circleci/destroy.sh
 
 
