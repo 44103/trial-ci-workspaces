@@ -13,10 +13,10 @@ jobs:
           root: .
           paths:
             - infrastructure/functions
-      # - save_cache:
-      #     key: rust-{{ checksum "Cargo.lock" }}
-      #     paths:
-      #       - infrastructure/functions
+      - save_cache:
+          key: rust-{{ checksum "Cargo.lock" }}
+          paths:
+            - infrastructure/functions
   stage:
     docker:
       - image: hashicorp/terraform
