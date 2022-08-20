@@ -1,23 +1,28 @@
 version: 2.1
 
 jobs:
-  # build:
-  #   docker:
-  #     - image: circleci/rust
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Build Lambda Functions
-  #         command: make ci-build
-  #     - save_cache:
-  #         key: rust-{{ checksum "Cargo.lock" }}
-  #         paths:
-  #           - infrastructure/functions
+  build:
+    docker:
+      - image: circleci/rust
+    steps:
+      - checkout
+      - run:
+          name: Build Lambda Functions
+          command: ./.circleci/build.sh
+      - persist_to_workspace:
+          paths:
+            - infrastructure/functions
+      # - save_cache:
+      #     key: rust-{{ checksum "Cargo.lock" }}
+      #     paths:
+      #       - infrastructure/functions
   stage:
     docker:
       - image: hashicorp/terraform
     steps:
       - checkout
+      - attach_workspace:
+          at: infrastructure/functions
       - run:
           name: Stage
           command: ./.circleci/stage.sh

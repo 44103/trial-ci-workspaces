@@ -1,4 +1,4 @@
-variable "common_values" {}
+variable "commons" {}
 
 variable "name" {
   description = "リソース名"
