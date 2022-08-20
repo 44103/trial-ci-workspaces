@@ -43,6 +43,6 @@ workflows:
   stage:
     jobs:
       - stage
+        requires:
+          - build
       - destroy
-      requires:
-        - build
