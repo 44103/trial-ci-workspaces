@@ -19,8 +19,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Stage AWS
-          command: ./ci-stage.sh ${CIRCLE_BRANCH}
+          name: Stage
+          command: ./.circleci/stage.sh
+  destroy:
+    docker:
+      - image: hashicorp/terraform
+    steps:
+      - checkout
+      - run:
+          name: Destroy
+          command: ./.circleci/destroy.sh
 
 
 workflows:
@@ -30,5 +38,6 @@ workflows:
   stage:
     jobs:
       - stage
+      - destroy
     # requires:
     #   - build
