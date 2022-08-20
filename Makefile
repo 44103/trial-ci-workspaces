@@ -11,15 +11,13 @@ apply:
 
 destroy:
 	@docker compose run --rm terraform init -reconfigure -backend-config=dev.tfbackend
-	@docker compose run --rm terraform fmt -check
 	@docker compose run --rm terraform validate
-	@docker compose run --rm terraform workspace switch default
+	@docker compose run --rm terraform workspace select $(WS)
 	@docker compose run --rm terraform plan
 	@docker compose run --rm terraform destroy
 
 check:
 	@docker compose run --rm terraform fmt -recursive
-	@docker compose run --rm terraform fmt -check
 	@docker compose run --rm terraform validate
 
 create:
