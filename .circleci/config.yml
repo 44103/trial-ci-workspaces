@@ -37,11 +37,9 @@ jobs:
 
 
 workflows:
-  build:
+  staging:
     jobs:
       - build
-  stage:
-    jobs:
       - stage
           requires:
             - build
