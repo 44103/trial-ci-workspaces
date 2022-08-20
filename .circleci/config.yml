@@ -1,13 +1,13 @@
 version: 2.1
 
-commands:
-  check-merged:
-    parameters:
-      pattern:
-        type: string
-    steps:
-      - run:
-          command: ./.circleci/merged.sh ${CIRCLE_BRANCH}
+# commands:
+#   check-merged:
+#     parameters:
+#       pattern:
+#         type: string
+#     steps:
+#       - run:
+#           command: git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1
 
 jobs:
   # build:
@@ -35,8 +35,9 @@ jobs:
       - image: hashicorp/terraform
     steps:
       - checkout
-      - check-merged:
-          pattern: "merge"
+      - run:
+          name: Check
+          command: ./.circleci/merged.sh
       - run:
           name: Destroy
           command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
