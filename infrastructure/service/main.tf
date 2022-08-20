@@ -12,10 +12,10 @@ module "lambda_hello_world" {
   name    = "trial"
 }
 
-module "apigw" {
-  source    = "../modules/apigw"
-  commons   = local.commons
-  name      = "trial"
-  lambda    = module.lambda_hello_world
-  path_part = "greet"
-}
+# module "apigw" {
+#   source    = "../modules/apigw"
+#   commons   = local.commons
+#   name      = "trial"
+#   lambda    = module.lambda_hello_world
+#   path_part = "greet"
+# }
