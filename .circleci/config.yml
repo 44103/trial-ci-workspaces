@@ -44,5 +44,5 @@ workflows:
     jobs:
       - stage
       - destroy
-    requires:
-      - build
+      requires:
+        - build
