@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: .
+          at: infrastructure/functions
       - run:
           name: Stage
           command: ./.circleci/stage.sh
