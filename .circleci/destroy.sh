@@ -15,10 +15,7 @@ init_tf_workspace() {
   terraform plan
 }
 
-cd infrastructure/service
-
 echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
-CURR_BRANCH=$1
 
 IFS_BACKUP=$IFS
 IFS=$'\n'

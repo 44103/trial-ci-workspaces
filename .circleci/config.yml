@@ -1,14 +1,5 @@
 version: 2.1
 
-# commands:
-#   check-merged:
-#     parameters:
-#       pattern:
-#         type: string
-#     steps:
-#       - run:
-#           command: git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1
-
 jobs:
   # build:
   #   docker:
@@ -28,19 +19,18 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Stage AWS
-          command: ./.circleci/stage.sh ${CIRCLE_BRANCH}
+          name: Stage
+          working_directory: infrastructure/service
+          command: ./.circleci/stage.sh
   destroy:
     docker:
       - image: hashicorp/terraform
     steps:
       - checkout
       - run:
-          name: Check
-          command: ./.circleci/merged.sh
-      - run:
           name: Destroy
-          command: ./.circleci/destroy.sh ${CIRCLE_BRANCH}
+          working_directory: infrastructure/service
+          command: ./.circleci/destroy.sh
 
 
 workflows:
@@ -50,10 +40,6 @@ workflows:
   stage:
     jobs:
       - stage
-      # - approval-destroy:
-      #     type: approval
       - destroy
-          # requires:
-          #   - approval-destroy
     # requires:
     #   - build

@@ -15,34 +15,12 @@ init_tf_workspace() {
   terraform plan
 }
 
-cd infrastructure/service
-
 echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
-CURR_BRANCH=$1
 
-IFS_BACKUP=$IFS
-IFS=$'\n'
-
-COMMIT_MSG=$(git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1)
-# COMMIT_MSG='Merge pull request #3 from xxxxx/feature/001-1'
-
-# if [ $(echo $COMMIT_MSG | egrep '^Merge pull request #[0-9]+ from') ]; then
-#   echo 'match merge pull request'
-#   MERGED_BRANCH=$(echo $COMMIT_MSG | sed -E 's/^Merge pull request #[0-9]+ from [^/]+\///g')
-#   echo $MERGED_BRANCH
-#   WORKSPACE=${MERGED_BRANCH/feature\//ft}
-#   init_tf_workspace $WORKSPACE
-#   terraform destroy -auto-approve
-#   terraform workspace select default
-#   terraform workspace delete $WORKSPACE
-# fi
-
-WORKSPACE=$CURR_BRANCH
-if [[ $CURR_BRANCH =~ feature ]]; then
-  WORKSPACE=${CURR_BRANCH/feature\//ft}
+WORKSPACE=$CIRCLE_BRANCH
+if [[ $CIRCLE_BRANCH =~ feature ]]; then
+  WORKSPACE=${CIRCLE_BRANCH/feature\//ft}
 fi
 
 init_tf_workspace $WORKSPACE
 terraform apply -auto-approve
-
-IFS=$IFS_BACKUP
