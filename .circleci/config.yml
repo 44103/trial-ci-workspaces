@@ -37,12 +37,12 @@ jobs:
 
 
 workflows:
-  # build:
-  #   jobs:
-  #     - build
+  build:
+    jobs:
+      - build
   stage:
     jobs:
       - stage
       - destroy
-    # requires:
-    #   - build
+    requires:
+      - build
