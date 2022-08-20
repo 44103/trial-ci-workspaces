@@ -10,6 +10,7 @@ jobs:
           name: Build Lambda Functions
           command: ./.circleci/build.sh
       - persist_to_workspace:
+          root: .
           paths:
             - infrastructure/functions
       # - save_cache:
@@ -22,7 +23,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: infrastructure/functions
+          at: .
       - run:
           name: Stage
           command: ./.circleci/stage.sh
