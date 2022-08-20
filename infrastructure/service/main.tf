@@ -9,5 +9,5 @@ module "vpc" {
 module "lambda_hello_world" {
   source  = "../modules/lambda"
   commons = local.commons
-  name    = "sample"
+  name    = "trial"
 }
