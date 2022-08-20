@@ -40,7 +40,7 @@ workflows:
   staging:
     jobs:
       - build
-      - stage
+      - stage:
           requires:
             - build
       - destroy
