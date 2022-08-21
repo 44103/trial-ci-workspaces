@@ -27,7 +27,8 @@ create:
 	@sudo chmod -R a+w infrastructure/functions/$(FUNC)
 
 build:
-	@docker compose run --rm app /bin/bash -c "cd $(FUNC) && rustup target add x86_64-unknown-linux-musl && cargo build --release --target x86_64-unknown-linux-musl"
+	# @docker compose run --rm app /bin/bash -c "cd $(FUNC) && rustup target add x86_64-unknown-linux-musl && cargo build --release --target x86_64-unknown-linux-musl"
+	@docker compose run --rm app /bin/bash -c "cd lambda && rustup target add x86_64-unknown-linux-musl && cargo build --release --target x86_64-unknown-linux-musl --bin $(FUNC)"
 
 chws:
 	@docker compose run --rm terraform workspace select $(WS)

@@ -6,16 +6,16 @@ module "vpc" {
   name    = "sample"
 }
 
-module "lambda_hello_world" {
+module "lambda_greet" {
   source  = "../modules/lambda"
   commons = local.commons
-  name    = "trial"
+  name    = "greet"
 }
 
 module "apigw" {
   source    = "../modules/apigw"
   commons   = local.commons
   name      = "trial"
-  lambda    = module.lambda_hello_world
+  lambda    = module.lambda_greet
   path_part = "greet"
 }

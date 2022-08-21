@@ -12,11 +12,11 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - infrastructure/functions
+            - infrastructure/functions/lambda/target
       - save_cache:
           key: rust-{{ checksum "Cargo.lock" }}
           paths:
-            - infrastructure/functions
+            - infrastructure/functions/lambda
   stage:
     docker:
       - image: hashicorp/terraform
@@ -42,6 +42,6 @@ workflows:
     jobs:
       - build
       - stage:
-            requires:
-              - build
+          requires:
+            - build
       - destroy
