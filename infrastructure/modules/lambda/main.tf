@@ -1,6 +1,35 @@
 resource "aws_iam_role" "_" {
   name               = local.name
-  assume_role_policy = file("${path.module}/assume_role_policy.json")
+  assume_role_policy = jsonencode({
+    Version: "2012-10-17",
+    Statement: [
+      {
+        Action: "sts:AssumeRole",
+        Principal: {
+          Service: "lambda.amazonaws.com"
+        },
+        Effect: "Allow"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "_" {
+  name = local.name
+  role = aws_iam_role._.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement: [
+      {
+        Action: [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        Effect: "Allow",
+        Resource: aws_cloudwatch_log_group._.arn
+      }
+    ]
+  })
 }
 
 data "archive_file" "_" {
@@ -41,4 +70,8 @@ resource "null_resource" "place_dist" {
     cp ./target/x86_64-unknown-linux-musl/release/${var.name} ./dist/${var.name}/bootstrap
     EOT
   }
+}
+
+resource "aws_cloudwatch_log_group" "_" {
+  name = "/aws/lambda/${local.name}"
 }
