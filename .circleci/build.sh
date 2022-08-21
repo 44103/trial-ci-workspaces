@@ -1,8 +1,7 @@
 #!/bin/bash
 
-for dir in $(ls -d infrastructure/functions/*/); do
-  cd $dir
-  rustup target add x86_64-unknown-linux-musl
-  cargo build --release --target x86_64-unknown-linux-musl
-  cd ../../..
+cd infrastructure/functions/lambda
+rustup target add x86_64-unknown-linux-musl
+for func in $(ls -d src/bin/*/); do
+  cargo build --release --target x86_64-unknown-linux-musl --bin $func
 done
