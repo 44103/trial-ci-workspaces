@@ -2,6 +2,6 @@
 
 cd infrastructure/functions/lambda
 rustup target add x86_64-unknown-linux-musl
-for func in $(ls src/bin/); do
+for func in $(basename src/bin/*.rs .rs); do
   cargo build --release --target x86_64-unknown-linux-musl --bin $func
 done
