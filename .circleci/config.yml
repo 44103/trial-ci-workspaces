@@ -12,7 +12,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - infrastructure/functions/lambda
+            - infrastructure/functions/lambda/target
       - save_cache:
           key: rust-{{ checksum "Cargo.lock" }}
           paths:
