@@ -18,10 +18,11 @@ resource "aws_iam_role_policy" "_" {
   name = local.name
   role = aws_iam_role._.id
   policy = jsonencode({
-    Version = "2012-10-17",
+    Version: "2012-10-17",
     Statement: [
       {
         Action: [
+          "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ],
