@@ -5,8 +5,8 @@ resource "aws_iam_role" "_" {
 
 data "archive_file" "_" {
   type        = "zip"
-  source_dir  = "${local.func_dir}/dist"
-  output_path = "${local.func_dir}/source.zip"
+  source_dir  = "${local.func_dir}/dist/${var.name}"
+  output_path = "${local.func_dir}/dist/${var.name}/source.zip"
 
   depends_on = [
     null_resource.place_dist
@@ -37,8 +37,8 @@ resource "null_resource" "place_dist" {
     working_dir = local.func_dir
     interpreter = ["/bin/sh", "-c"]
     command     = <<-EOT
-    mkdir -p ./dist
-    cp ./target/x86_64-unknown-linux-musl/release/${var.name} ./dist/bootstrap
+    mkdir -p ./dist/${var.name}
+    cp ./target/x86_64-unknown-linux-musl/release/${var.name} ./dist/${var.name}/bootstrap
     EOT
   }
 }
