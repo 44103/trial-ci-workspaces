@@ -38,9 +38,9 @@ data "archive_file" "_" {
   source_dir  = "${local.func_dir}/target/x86_64-unknown-linux-musl/release/${var.name}"
   output_path = "${local.func_dir}/target/x86_64-unknown-linux-musl/release/${var.name}/source.zip"
 
-  depends_on = [
-    null_resource.place_dist
-  ]
+  # depends_on = [
+  #   null_resource.place_dist
+  # ]
 }
 
 resource "aws_lambda_function" "_" {
