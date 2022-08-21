@@ -14,7 +14,7 @@ jobs:
           paths:
             - infrastructure/functions/lambda/target
       - save_cache:
-          key: rust-{{ checksum "Cargo.lock" }}
+          key: rust-{{ checksum "infrastructure/functions/lambda/Cargo.lock" }}
           paths:
             - infrastructure/functions/lambda
   stage:
