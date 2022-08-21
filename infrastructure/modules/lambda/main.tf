@@ -66,7 +66,7 @@ resource "null_resource" "place_dist" {
     working_dir = local.func_dir
     interpreter = ["/bin/sh", "-c"]
     command     = <<-EOT
-    mkdir -p ./dist/${var.name}
+    mkdir -p ./dist/${var.name}/bin
     cp ./target/x86_64-unknown-linux-musl/release/${var.name} ./dist/${var.name}/bin/bootstrap
     EOT
   }
