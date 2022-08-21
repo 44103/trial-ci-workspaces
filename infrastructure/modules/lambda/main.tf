@@ -39,7 +39,7 @@ data "archive_file" "_" {
   output_path = "${local.func_dir}/dist/${var.name}/source.zip"
 
   depends_on = [
-    null_resource.place_dist
+    null_resource.place
   ]
 }
 
@@ -57,7 +57,7 @@ resource "aws_lambda_function" "_" {
   }
 }
 
-resource "null_resource" "place_dist" {
+resource "null_resource" "place" {
   # triggers = {
   #   dist = filesha256("${local.func_dir}/target/x86_64-unknown-linux-musl/release/${var.name}")
   # }
