@@ -29,9 +29,9 @@ resource "aws_lambda_function" "_" {
 
 
 resource "null_resource" "place_dist" {
-  triggers = {
-    dist = filesha256("${local.func_dir}/target/x86_64-unknown-linux-musl/release/${var.name}")
-  }
+  # triggers = {
+  #   dist = filesha256("${local.func_dir}/target/x86_64-unknown-linux-musl/release/${var.name}")
+  # }
 
   provisioner "local-exec" {
     working_dir = local.func_dir
