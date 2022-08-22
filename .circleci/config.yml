@@ -14,9 +14,10 @@ jobs:
           paths:
             - infrastructure/functions/lambda/target
       - save_cache:
-          key: rust-{{ checksum "infrastructure/functions/lambda/Cargo.lock" }}
+          key: v1-cargo-lock-{{ checksum "infrastructure/functions/lambda/Cargo.lock" }}
           paths:
-            - infrastructure/functions/lambda
+            - /usr/local/cargo/registry
+            - infrastructure/functions/lambda/target
   stage:
     docker:
       - image: hashicorp/terraform
