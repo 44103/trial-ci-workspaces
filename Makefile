@@ -18,7 +18,7 @@ destroy:
 
 check:
 	@make init
-	@docker compose run --rm terraform fmt -recursive
+	@docker compose run --rm tf_fmt fmt -recursive
 	@docker compose run --rm terraform validate
 	@make plan
 

@@ -1,14 +1,14 @@
 resource "aws_iam_role" "_" {
-  name               = local.name
+  name = local.name
   assume_role_policy = jsonencode({
-    Version: "2012-10-17",
-    Statement: [
+    Version : "2012-10-17",
+    Statement : [
       {
-        Action: "sts:AssumeRole",
-        Principal: {
-          Service: "lambda.amazonaws.com"
+        Action : "sts:AssumeRole",
+        Principal : {
+          Service : "lambda.amazonaws.com"
         },
-        Effect: "Allow"
+        Effect : "Allow"
       }
     ]
   })
@@ -27,16 +27,16 @@ resource "aws_iam_role_policy" "_" {
   name = local.name
   role = aws_iam_role._.id
   policy = jsonencode({
-    Version: "2012-10-17",
-    Statement: [
+    Version : "2012-10-17",
+    Statement : [
       {
-        Action: [
+        Action : [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ],
-        Effect: "Allow",
-        Resource: aws_cloudwatch_log_group._.arn
+        Effect : "Allow",
+        Resource : aws_cloudwatch_log_group._.arn
       }
     ]
   })
