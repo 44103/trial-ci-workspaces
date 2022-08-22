@@ -14,7 +14,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - infrastructure/functions/lambda/target
+            - infrastructure/functions/lambda/dist
       - save_cache:
           key: v1-cargo-lock-{{ checksum "infrastructure/functions/lambda/Cargo.lock" }}
           paths:
