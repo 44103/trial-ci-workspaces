@@ -31,7 +31,7 @@ struct Body {
 
 async fn func(event: Request, _: Context) -> Result<impl IntoResponse, Error> {
   let args: Args = serde_json::from_slice(event.body().as_ref()).unwrap();
-  let body: Body = Body { message: args.name };
+  let body: Body = Body { message: format!("Hello {}", args.name) };
   Ok(Response::builder()
     .status(200)
     .header("Content-Type", "application/json")
