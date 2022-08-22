@@ -14,6 +14,15 @@ resource "aws_iam_role" "_" {
   })
 }
 
+data "aws_iam_policy" "AWSLambdaBasicExecutionRole" {
+  name = "AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy_attachment" "AWSLambdaBasicExecutionRole" {
+  role       = aws_iam_role._.id
+  policy_arn = data.aws_iam_policy.AWSLambdaBasicExecutionRole.arn
+}
+
 resource "aws_iam_role_policy" "_" {
   name = local.name
   role = aws_iam_role._.id
