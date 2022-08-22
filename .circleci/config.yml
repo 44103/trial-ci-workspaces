@@ -6,6 +6,8 @@ jobs:
       - image: circleci/rust
     steps:
       - checkout
+      - restore_cache:
+          key: v1-cargo-lock-{{ checksum "infrastructure/functions/lambda/Cargo.lock" }}
       - run:
           name: Build Lambda Functions
           command: ./.circleci/build.sh
