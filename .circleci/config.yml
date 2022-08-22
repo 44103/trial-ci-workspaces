@@ -20,6 +20,7 @@ jobs:
           paths:
             - /usr/local/cargo/registry
             - infrastructure/functions/lambda/target
+            - infrastructure/functions/lambda/dist
   stage:
     docker:
       - image: hashicorp/terraform
