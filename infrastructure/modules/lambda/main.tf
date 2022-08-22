@@ -55,6 +55,10 @@ resource "aws_lambda_function" "_" {
   environment {
     variables = local.envs
   }
+
+  depends_on = [
+    null_resource.place
+  ]
 }
 
 resource "null_resource" "place" {
