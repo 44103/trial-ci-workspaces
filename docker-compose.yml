@@ -10,6 +10,15 @@ services:
       - AWS_SECRET_ACCESS_KEY
       - AWS_REGION
     working_dir: "/work/service"
+  tf_fmt:
+    image: hashicorp/terraform:latest
+    volumes:
+      - ./infrastructure:/work
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION
+    working_dir: "/work"
 
   app:
     image: rust

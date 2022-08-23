@@ -1,34 +1,52 @@
 version: 2.1
 
+
 jobs:
-  # build:
-  #   docker:
-  #     - image: circleci/rust
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Build Lambda Functions
-  #         command: make ci-build
-  #     - save_cache:
-  #         key: rust-{{ checksum "Cargo.lock" }}
-  #         paths:
-  #           - infrastructure/functions
+  build:
+    docker:
+      - image: circleci/rust
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-cargo-lock-{{ checksum "infrastructure/functions/lambda/Cargo.lock" }}
+      - run:
+          name: Build Lambda Functions
+          command: ./.circleci/build.sh
+      - persist_to_workspace:
+          root: .
+          paths:
+            - infrastructure/functions/lambda/dist
+      - save_cache:
+          key: v1-cargo-lock-{{ checksum "infrastructure/functions/lambda/Cargo.lock" }}
+          paths:
+            - /usr/local/cargo/registry
+            - infrastructure/functions/lambda/target
+            - infrastructure/functions/lambda/dist
   stage:
     docker:
       - image: hashicorp/terraform
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run:
-          name: Stage AWS
-          command: ./ci-stage.sh ${CIRCLE_BRANCH}
+          name: Stage
+          command: ./.circleci/stage.sh $CIRCLE_BRANCH
+  destroy:
+    docker:
+      - image: hashicorp/terraform
+    steps:
+      - checkout
+      - run:
+          name: Destroy
+          command: ./.circleci/destroy.sh $CIRCLE_SHA1
 
 
 workflows:
-  # build:
-  #   jobs:
-  #     - build
-  stage:
+  staging:
     jobs:
-      - stage
-    # requires:
-    #   - build
+      - build
+      - stage:
+          requires:
+            - build
+      - destroy

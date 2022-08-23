@@ -1,0 +1,3 @@
+bucket = "<bucket-name>"
+key    = "<project-name>/terraform.tfstate"
+region = "<region>"

@@ -1,4 +1,4 @@
-variable "common_values" {}
+variable "commons" {}
 
 variable "name" {
   description = "リソース名"
@@ -11,15 +11,15 @@ variable "envs" {
 
 locals {
   name = join("_", [
-    var.common_values.workspace,
+    var.commons.workspace,
     var.name,
-    var.common_values.service,
-    var.common_values.project
-    ])
+    var.commons.service,
+    var.commons.project
+  ])
   envs = merge(
     { "TZ" = "Asia/Tokyo" },
     var.envs
   )
-  func_dir = "${path.module}/../../functions/${var.name}"
+  func_dir = "${path.module}/../../functions/lambda"
   dist_dir = "${local.func_dir}/bootstrap"
 }

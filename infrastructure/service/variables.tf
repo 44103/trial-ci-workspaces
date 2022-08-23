@@ -18,7 +18,7 @@ variable "environment" {
 }
 
 locals {
-  common_values = {
+  commons = {
     region      = var.region
     project     = var.project
     service     = var.service
