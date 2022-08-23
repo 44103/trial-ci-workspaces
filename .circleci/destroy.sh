@@ -2,9 +2,7 @@
 
 switch_tf_workspace() {
   terraform workspace new $1
-  terraform workspace select $1
-  # TODO: exec failed
-  # circleci-agent step halt
+  terraform workspace select $1 || exit 1
 }
 
 init_tf_workspace() {
