@@ -52,3 +52,5 @@ workflows:
           requires:
             - build
       - destroy
+          requires:
+            - build
