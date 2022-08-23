@@ -1,4 +1,4 @@
-.PHONY: init plan apply destroy check create build chws
+.PHONY: init plan apply destroy check create build select_ws list_ws
 
 init:
 	@docker compose run --rm terraform init -reconfigure -backend-config=dev.tfbackend
@@ -30,5 +30,8 @@ build:
 	# @docker compose run --rm app /bin/bash -c "cd $(FUNC) && rustup target add x86_64-unknown-linux-musl && cargo build --release --target x86_64-unknown-linux-musl"
 	@docker compose run --rm app /bin/bash -c "cd lambda && rustup target add x86_64-unknown-linux-musl && cargo build --release --target x86_64-unknown-linux-musl --bin $(FUNC)"
 
-chws:
+select_ws:
 	@docker compose run --rm terraform workspace select $(WS)
+
+list_ws:
+	@docker compose run --rm terraform workspace list
