@@ -37,6 +37,8 @@ jobs:
       - image: hashicorp/terraform
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: Destroy
           command: ./.circleci/destroy.sh $CIRCLE_SHA1
