@@ -19,9 +19,9 @@ cd infrastructure/service
 
 echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
 
-WORKSPACE=$CIRCLE_BRANCH
-if [[ $CIRCLE_BRANCH =~ feature ]]; then
-  WORKSPACE=${CIRCLE_BRANCH/feature\//ft}
+WORKSPACE=$1
+if [[ $1 =~ feature ]]; then
+  WORKSPACE=${1/feature\//ft}
 fi
 
 init_tf_workspace $WORKSPACE

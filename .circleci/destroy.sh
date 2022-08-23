@@ -22,7 +22,7 @@ echo $DEV_TFBACKEND | base64 -d >dev.tfbackend
 IFS_BACKUP=$IFS
 IFS=$'\n'
 
-COMMIT_MSG=$(git log --pretty=format:"%s" -n 1 $CIRCLE_SHA1)
+COMMIT_MSG=$(git log --pretty=format:"%s" -n 1 $1)
 # COMMIT_MSG='Merge pull request #3 from xxxxx/feature/001-1'
 
 if [ $(echo $COMMIT_MSG | egrep '^Merge pull request #[0-9]+ from') ]; then

@@ -1,5 +1,6 @@
 version: 2.1
 
+
 jobs:
   build:
     docker:
@@ -30,7 +31,7 @@ jobs:
           at: .
       - run:
           name: Stage
-          command: ./.circleci/stage.sh
+          command: ./.circleci/stage.sh $CIRCLE_BRANCH
   destroy:
     docker:
       - image: hashicorp/terraform
@@ -38,7 +39,7 @@ jobs:
       - checkout
       - run:
           name: Destroy
-          command: ./.circleci/destroy.sh
+          command: ./.circleci/destroy.sh $CIRCLE_SHA1
 
 
 workflows:
